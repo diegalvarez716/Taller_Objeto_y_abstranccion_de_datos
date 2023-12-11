@@ -1,12 +1,11 @@
 package com.example.leerarchivo;
 
-public class QueuePokedex extends Group {
+public class QueueTeam extends Group{
     PocketMonster cabeza,cola;
     int tamaño=0;
 
-    public QueuePokedex(){
-        cabeza = null;
-        cola = null;
+    public QueueTeam() {
+        cabeza = cola = null;
     }
 
     @Override
@@ -19,6 +18,7 @@ public class QueuePokedex extends Group {
         }
         tamaño++;
     }
+
     @Override
     public PocketMonster remove() {
         if(cola == null){

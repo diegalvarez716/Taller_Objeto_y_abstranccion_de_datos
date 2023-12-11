@@ -25,7 +25,6 @@ public class StackPokedex extends Group{
             return null;
         }
         PocketMonster aux = cabeza;
-        cabeza = null;
         cabeza = aux.siguiente;
         return aux;
     }

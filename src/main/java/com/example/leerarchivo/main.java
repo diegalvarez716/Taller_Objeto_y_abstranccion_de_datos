@@ -3,6 +3,7 @@ import java.io.*;
 public class main {
 
     public static void main(String [] args){
+
         try {
             String buffer;
             BufferedReader bf = new BufferedReader(new FileReader(args[0]));
@@ -34,7 +35,5 @@ public class main {
         }
 
     }
-
-
 
 }

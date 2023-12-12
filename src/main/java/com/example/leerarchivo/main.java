@@ -6,6 +6,7 @@ public class main {
         try {
             String buffer;
             BufferedReader bf = new BufferedReader(new FileReader(args[0]));
+
             while((buffer = bf.readLine()) != null){
 
                 if(buffer.equalsIgnoreCase("CREATE STACK POKEDEX")){
@@ -32,7 +33,10 @@ public class main {
         }catch (Exception e){
             System.out.println("Error al leer el archivo");
         }
+
+
     }
+
 
     public static String Encuentro(StackTeam team1, QueueTeam team2){
         String retorno ="";
@@ -44,35 +48,37 @@ public class main {
             ganador = ganador(pokemon1,pokemon2);
 
             if(ganador != null){
-                retorno = retorno + "\\nTURN "+String.valueOf(i)+"\\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
+                retorno = retorno + "\nTURN "+String.valueOf(i)+"\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
                         " -> "+ganador.name+"/"+ganador.type;
                 if(ganador == pokemon1){
-                    pokemon1.siguiente =null;
+
                     team1.add(pokemon1);
                 }else{
-                    pokemon2.siguiente =null;
+
                     team2.add(pokemon2);
                 }
             }else{
-                retorno = retorno + "\\nTURN "+String.valueOf(i)+"\\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
+
+                team1.add(pokemon1);
+                team2.add(pokemon2);
+                retorno = retorno + "\nTURN "+String.valueOf(i)+"\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
                         " -> DRAW";
             }
 
             if((team1.tamaño==0 && team2.tamaño==0)&&(pokemon1.type.equalsIgnoreCase(pokemon2.type))){
-                pokemon1.siguiente =null;
-                pokemon2.siguiente =null;
                 team1.add(pokemon1);
                 team2.add(pokemon2);
                 break;
             }
+            i++;
         }
 
         if (team1.tamaño == 0) {
-            retorno = retorno+"\\n"+"QUEUE TEAM WINS";
+            retorno = retorno+"\n"+"QUEUE TEAM WINS";
         } else if (team2.tamaño == 0) {
-            retorno = retorno+"\\n"+"STACK TEAM WINS";
+            retorno = retorno+"\n"+"STACK TEAM WINS";
         } else {
-            retorno = retorno+"\\n"+"TIE";
+            retorno = retorno+"\n"+"TIE";
         }
 
         return retorno;

@@ -36,7 +36,7 @@ public class QueueTeam extends Group{
         PocketMonster aux = cola;
         String nombres = "";
         while(aux != null){
-            nombres = nombres+" "+aux.name;
+            nombres = nombres+" "+aux.name+"/"+aux.type;
             aux = aux.siguiente;
         }
         return nombres;

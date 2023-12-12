@@ -25,6 +25,7 @@ public class StackTeam extends Group{
         }
         PocketMonster aux = cabeza;
         cabeza = aux.siguiente;
+        tamaño--;
         return aux;
     }
 
@@ -34,7 +35,7 @@ public class StackTeam extends Group{
         PocketMonster aux = cabeza;
         String nombres = "";
         while(aux != null){
-            nombres = nombres+" "+aux.name;
+            nombres = nombres+" "+aux.name+"/"+aux.type;
             aux = aux.siguiente;
         }
         return nombres;

@@ -3,30 +3,103 @@ import java.io.*;
 public class main {
     public static void main(String [] args){
 
+        StackPokedex stackPokedex = new StackPokedex(); QueuePokedex queuePokedex= new QueuePokedex();
+        StackTeam stackTeam = new StackTeam(); QueueTeam queueTeam = new QueueTeam();
+
+        String encuentro, stackteam, queueteam, stackpokedex,queuepokedex;
+
         try {
-            String buffer;
+            String buffer,copia;
             BufferedReader bf = new BufferedReader(new FileReader(args[0]));
 
             while((buffer = bf.readLine()) != null){
 
                 if(buffer.equalsIgnoreCase("CREATE STACK POKEDEX")){
 
+                    buffer = bf.readLine();
+                    copia = buffer.trim();
+
+                    for(int i=0; i<copia.length();i++){
+
+                        String nombreytipo="",nombre="",tipo="";
+
+                        try {
+                            while (buffer.charAt(i) != ','){
+                                nombreytipo = nombreytipo + copia.charAt(i);
+                                i++;
+                            }
+                        }catch (Exception e){
+                        }
+
+                        int j;
+                        try {
+                            for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
+                                nombre=nombre+nombreytipo.trim().charAt(j);
+                            }
+                            for (int k=j+1; k<nombreytipo.length(); k++){
+                                tipo = tipo+nombreytipo.trim().charAt(k);
+                            }
+                        }catch (Exception e){
+                        }
+
+                        if(tipo.trim().equalsIgnoreCase("Fire") || tipo.trim().equalsIgnoreCase("Water") ||
+                                tipo.trim().equalsIgnoreCase("Grass")){
+                                PocketMonster nuevo = new PocketMonster(tipo,nombre);
+                                stackPokedex.add(nuevo);
+                        }
+                    }
+
                 }else if (buffer.equalsIgnoreCase("CREATE QUEUE POKEDEX")){
 
+                    buffer = bf.readLine();
+                    copia = buffer.trim();
+
+                    for(int i=0; i<copia.length();i++){
+
+                        String nombreytipo="",nombre="",tipo="";
+
+                        try {
+                            while (buffer.charAt(i) != ','){
+                                nombreytipo = nombreytipo + copia.charAt(i);
+                                i++;
+                            }
+                        }catch (Exception e){
+                        }
+
+                        int j;
+                        try {
+                            for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
+                                nombre=nombre+nombreytipo.trim().charAt(j);
+                            }
+                            for (int k=j+1; k<nombreytipo.length(); k++){
+                                tipo = tipo+nombreytipo.trim().charAt(k);
+                            }
+                        }catch (Exception e){
+                        }
+
+                        if(tipo.trim().equalsIgnoreCase("Fire") || tipo.trim().equalsIgnoreCase("Water") ||
+                                tipo.trim().equalsIgnoreCase("Grass")){
+                            PocketMonster nuevo = new PocketMonster(tipo,nombre);
+                            queuePokedex.add(nuevo);
+                        }
+                    }
+
                 }else if (buffer.equalsIgnoreCase("SHOW STACK POKEDEX")){
-
+                    stackpokedex = stackPokedex.show();
                 }else if (buffer.equalsIgnoreCase("SHOW QUEUE POKEDEX")){
-
+                    queuepokedex = queuePokedex.show();
                 }else if (buffer.equalsIgnoreCase("CREATE STACK TEAM")){
+
                     
                 }else if (buffer.equalsIgnoreCase("CREATE QUEUE TEAM")){
+
                     
                 }else if (buffer.equalsIgnoreCase("SHOW STACK TEAM")) {
-                    
+                    stackteam = stackTeam.show();
                 }else if (buffer.equalsIgnoreCase("SHOW QUEUE TEAM")){
-
+                    queueteam = queueTeam.show();
                 } else if (buffer.equalsIgnoreCase("ENCOUNTER")) {
-
+                    encuentro = Encuentro(stackTeam,queueTeam);
                 }
             }
 

@@ -1,39 +1,38 @@
 package com.example.leerarchivo;
 
 public class StackPokedex extends Group{
-    PocketMonster cabeza,cola;
+    PocketMonster fin;
     int tamaño=0;
 
     public StackPokedex(){
-       cabeza = null;
-       cola = null;
+       fin = null;
     }
 
     @Override
     public void add(PocketMonster nuevo) {
-        if (cola == null){
-            cabeza = cola = nuevo;
+        if (fin == null){
+            fin  = nuevo;
         }else {
-            nuevo.siguiente = cabeza;
-            cabeza = nuevo;
+            nuevo.siguiente = fin;
+            fin = nuevo;
         }
         tamaño++;
     }
     @Override
     public PocketMonster remove() {
-        if(cola == null){
+        if(fin == null){
             return null;
         }
-        PocketMonster aux = cabeza;
-        cabeza = aux.siguiente;
+        PocketMonster aux = fin;
+        fin = aux.siguiente;
         tamaño--;
         return aux;
     }
 
     @Override
     public String show() {
-        if(cola == null) return "La pila esta vacia";
-        PocketMonster aux = cabeza;
+        if(fin == null) return "La pila esta vacia";
+        PocketMonster aux = fin;
         String nombres = "";
         while(aux != null){
             nombres = nombres+" "+aux.name+"/"+aux.type;

@@ -6,45 +6,50 @@ public class main {
         StackPokedex stackPokedex = new StackPokedex(); QueuePokedex queuePokedex= new QueuePokedex();
         StackTeam stackTeam = new StackTeam(); QueueTeam queueTeam = new QueueTeam();
 
-        String encuentro, stackteam, queueteam, stackpokedex,queuepokedex;
+        String encuentro="", stackteam="", queueteam="", stackpokedex="",queuepokedex="";
 
         try {
-            String buffer,copia;
-            BufferedReader bf = new BufferedReader(new FileReader(args[0]));
+
+            String buffer;
+            BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Usuario\\Desktop\\pruebafinal.txt"));
 
             while((buffer = bf.readLine()) != null){
 
                 if(buffer.equalsIgnoreCase("CREATE STACK POKEDEX")){
 
                     buffer = bf.readLine();
-                    copia = buffer.trim();
 
-                    for(int i=0; i<copia.length();i++){
+
+                    for(int i=0; i<buffer.length();i++){
 
                         String nombreytipo="",nombre="",tipo="";
-
-                        try {
-                            while (buffer.charAt(i) != ','){
-                                nombreytipo = nombreytipo + copia.charAt(i);
-                                i++;
+                        if(buffer.charAt(i) != ' '){
+                            try {
+                                while (buffer.charAt(i) != ','){
+                                    nombreytipo = nombreytipo + buffer.charAt(i);
+                                    i++;
+                                }
+                            }catch (Exception e){
                             }
-                        }catch (Exception e){
                         }
 
-                        int j;
-                        try {
-                            for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
-                                nombre=nombre+nombreytipo.trim().charAt(j);
+                        if(!(nombreytipo.equalsIgnoreCase(""))){
+                            int j;
+                            try {
+                                for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
+                                    nombre=nombre+nombreytipo.trim().charAt(j);
+                                }
+                                for (int k=j+1; k<nombreytipo.length(); k++){
+                                    tipo = tipo+nombreytipo.trim().charAt(k);
+                                }
+
+                            }catch (Exception e){
                             }
-                            for (int k=j+1; k<nombreytipo.length(); k++){
-                                tipo = tipo+nombreytipo.trim().charAt(k);
-                            }
-                        }catch (Exception e){
                         }
 
                         if(tipo.trim().equalsIgnoreCase("Fire") || tipo.trim().equalsIgnoreCase("Water") ||
                                 tipo.trim().equalsIgnoreCase("Grass")){
-                                PocketMonster nuevo = new PocketMonster(tipo,nombre);
+                                PocketMonster nuevo = new PocketMonster(tipo.trim(),nombre.trim());
                                 stackPokedex.add(nuevo);
                         }
                     }
@@ -52,34 +57,38 @@ public class main {
                 }else if (buffer.equalsIgnoreCase("CREATE QUEUE POKEDEX")){
 
                     buffer = bf.readLine();
-                    copia = buffer.trim();
 
-                    for(int i=0; i<copia.length();i++){
+                    for(int i=0; i<buffer.length();i++){
 
                         String nombreytipo="",nombre="",tipo="";
 
-                        try {
-                            while (buffer.charAt(i) != ','){
-                                nombreytipo = nombreytipo + copia.charAt(i);
-                                i++;
+                        if(buffer.charAt(i) != ' '){
+                            try {
+                                while (buffer.charAt(i) != ','){
+                                    nombreytipo = nombreytipo + buffer.charAt(i);
+                                    i++;
+                                }
+                            }catch (Exception e){
                             }
-                        }catch (Exception e){
                         }
 
-                        int j;
-                        try {
-                            for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
-                                nombre=nombre+nombreytipo.trim().charAt(j);
+                        if(!(nombreytipo.equalsIgnoreCase(""))){
+                            int j;
+                            try {
+                                for (j=0; nombreytipo.trim().charAt(j)!='/';j++){
+                                    nombre=nombre+nombreytipo.trim().charAt(j);
+                                }
+                                for (int k=j+1; k<nombreytipo.length(); k++){
+                                    tipo = tipo+nombreytipo.trim().charAt(k);
+                                }
+
+                            }catch (Exception e){
                             }
-                            for (int k=j+1; k<nombreytipo.length(); k++){
-                                tipo = tipo+nombreytipo.trim().charAt(k);
-                            }
-                        }catch (Exception e){
                         }
 
                         if(tipo.trim().equalsIgnoreCase("Fire") || tipo.trim().equalsIgnoreCase("Water") ||
                                 tipo.trim().equalsIgnoreCase("Grass")){
-                            PocketMonster nuevo = new PocketMonster(tipo,nombre);
+                            PocketMonster nuevo = new PocketMonster(tipo.trim(),nombre.trim());
                             queuePokedex.add(nuevo);
                         }
                     }
@@ -89,14 +98,42 @@ public class main {
                 }else if (buffer.equalsIgnoreCase("SHOW QUEUE POKEDEX")){
                     queuepokedex = queuePokedex.show();
                 }else if (buffer.equalsIgnoreCase("CREATE STACK TEAM")){
+                    buffer = bf.readLine();
+                    for (int i=0; i<buffer.length(); i++){
+                        String tipo="";
+                        try{
+                            while (buffer.charAt(i) != ' '){
+                                tipo=tipo+buffer.charAt(i);
+                                i++;
+                            }
+                        }catch (Exception e) {
+                        }
+                        if (!(tipo.equalsIgnoreCase(""))){
+                            llenarteamstack(tipo,stackPokedex,stackTeam);
+                        }
+                    }
 
-                    
                 }else if (buffer.equalsIgnoreCase("CREATE QUEUE TEAM")){
+                    buffer = bf.readLine();
+                    for (int i=0; i<buffer.length(); i++){
+                        String tipo="";
+                        try{
+                            while (buffer.charAt(i) != ' '){
+                                tipo=tipo+buffer.charAt(i);
+                                i++;
+                            }
+                        }catch (Exception e){
+                        }
 
-                    
+                        if(!(tipo.equalsIgnoreCase(""))){
+                            llenarteamqueue(tipo, queuePokedex, queueTeam);
+                        }
+                    }
                 }else if (buffer.equalsIgnoreCase("SHOW STACK TEAM")) {
+                    System.out.println(stackteam);
                     stackteam = stackTeam.show();
                 }else if (buffer.equalsIgnoreCase("SHOW QUEUE TEAM")){
+                    System.out.println(queueteam);
                     queueteam = queueTeam.show();
                 } else if (buffer.equalsIgnoreCase("ENCOUNTER")) {
                     encuentro = Encuentro(stackTeam,queueTeam);
@@ -106,7 +143,6 @@ public class main {
         }catch (Exception e){
             System.out.println("Error al leer el archivo");
         }
-
 
     }
 
@@ -156,7 +192,6 @@ public class main {
 
         return retorno;
     }
-
     public static PocketMonster ganador(PocketMonster pokemon1, PocketMonster pokemon2){
 
         if (pokemon1.type.equalsIgnoreCase("Water") && pokemon2.type.equalsIgnoreCase("Fire")){
@@ -177,5 +212,29 @@ public class main {
 
         return null;
     }
+    public static void llenarteamstack (String tipo, StackPokedex pokedex, StackTeam team){
+        PocketMonster aux = pokedex.fin;
+        while (aux != null){
+            if(aux.type.equalsIgnoreCase(tipo) && !aux.seleccionado){
+                aux.seleccionado = true;
+                team.add(new PocketMonster(aux.type, aux.name));
+                break;
+            }
+            aux = aux.siguiente;
+        }
+    }
+    public static void llenarteamqueue (String tipo, QueuePokedex pokedex, QueueTeam team){
+        PocketMonster aux = pokedex.inicio;
+        while (aux != null){
+            if(aux.type.equalsIgnoreCase(tipo) && !aux.seleccionado){
+                aux.seleccionado = true;
+                team.add(new PocketMonster(aux.type, aux.name));
+                break;
+            }
+            aux = aux.siguiente;
+        }
+
+    }
+
 
 }

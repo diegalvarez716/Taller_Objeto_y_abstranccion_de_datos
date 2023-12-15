@@ -264,6 +264,8 @@ public class main {
         PocketMonster aux2 = team2.inicio;
         while (aux1 != null && aux2 != null){
             if(!(aux1.type.equalsIgnoreCase(aux2.type))) return false;
+            aux1 = aux1.siguiente;
+            aux2 = aux2.siguiente;
         }
         return true;
     }

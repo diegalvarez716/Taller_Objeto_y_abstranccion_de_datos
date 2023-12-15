@@ -175,6 +175,7 @@ public class main {
         int i =1;
 
         while ((team1.tamaño> 0 && team2.tamaño > 0)){
+
             PocketMonster pokemon1, pokemon2,ganador;
             pokemon1 = team1.remove();
             pokemon2 = team2.remove();
@@ -184,24 +185,23 @@ public class main {
                 retorno = retorno + "\nTURN "+String.valueOf(i)+"\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
                         " -> "+ganador.name+"/"+ganador.type;
                 if(ganador == pokemon1){
-
                     team1.add(pokemon1);
                 }else{
-
                     team2.add(pokemon2);
                 }
             }else{
-
                 team1.add(pokemon1);
                 team2.add(pokemon2);
                 retorno = retorno + "\nTURN "+String.valueOf(i)+"\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
                         " -> DRAW";
             }
 
-            if((team1.tamaño==0 && team2.tamaño==0)&&(pokemon1.type.equalsIgnoreCase(pokemon2.type))){
-                team1.add(pokemon1);
-                team2.add(pokemon2);
-                break;
+            if((team1.tamaño == team2.tamaño)){
+                if(!(iguales(team1,team2))){
+                    team1.add(pokemon1);
+                    team2.add(pokemon2);
+                    break;
+                }
             }
             i++;
         }
@@ -258,6 +258,14 @@ public class main {
             aux = aux.siguiente;
         }
 
+    }
+    public static boolean iguales(StackTeam team1, QueueTeam team2){
+        PocketMonster aux1 = team1.fin;
+        PocketMonster aux2 = team2.inicio;
+        while (aux1 != null && aux2 != null){
+            if(!(aux1.type.equalsIgnoreCase(aux2.type))) return false;
+        }
+        return true;
     }
 
 }

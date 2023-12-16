@@ -15,7 +15,7 @@ public class main {
         if(args[0].length() > 0){
             try {
                 String buffer;
-                BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Usuario\\Desktop\\pruebafinal.txt"));
+                BufferedReader bf = new BufferedReader(new FileReader(args[0]));
 
                 while((buffer = bf.readLine()) != null){
 

@@ -11,11 +11,11 @@ public class main {
         String ruta = System.getProperty("user.home") + "/Desktop";
         String rutaArchivo = ruta.replace("\\", "/")+"\\ArchivoSalida.mpdm";
 
-        if(args[0].length() >0 ){
 
+        if(args[0].length() > 0){
             try {
                 String buffer;
-                BufferedReader bf = new BufferedReader(new FileReader(args[0]));
+                BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Usuario\\Desktop\\pruebafinal.txt"));
 
                 while((buffer = bf.readLine()) != null){
 
@@ -132,12 +132,10 @@ public class main {
                         }
                     }else if (buffer.equalsIgnoreCase("SHOW STACK TEAM")) {
                         System.out.println(stackteam);
-                        stackteam = stackTeam.show();
                     }else if (buffer.equalsIgnoreCase("SHOW QUEUE TEAM")){
                         System.out.println(queueteam);
-                        queueteam = queueTeam.show();
                     } else if (buffer.equalsIgnoreCase("ENCOUNTER")) {
-                        encuentro = Encuentro(stackTeam,queueTeam);
+                        System.out.println(encuentro);
                     }
                 }
 
@@ -164,10 +162,10 @@ public class main {
             }finally {
                 JOptionPane.showMessageDialog(null, "Archivo de salida escrito satisfactoriamente");
             }
-
         }else{
-            JOptionPane.showMessageDialog(null, "Debe Ingresar un archivo como parametro");
+            JOptionPane.showMessageDialog(null, "Debe pasar un archivo como parametro");
         }
+
 
     }
     public static String Encuentro(StackTeam team1, QueueTeam team2){
@@ -179,6 +177,16 @@ public class main {
             PocketMonster pokemon1, pokemon2,ganador;
             pokemon1 = team1.remove();
             pokemon2 = team2.remove();
+
+            if((team1.tamaño == team2.tamaño)){
+                System.out.println("verifica tamaño");
+                if(iguales(team1,team2)){
+                    team1.add(pokemon1);
+                    team2.add(pokemon2);
+                    break;
+                }
+            }
+
             ganador = ganador(pokemon1,pokemon2);
 
             if(ganador != null){
@@ -194,14 +202,6 @@ public class main {
                 team2.add(pokemon2);
                 retorno = retorno + "\nTURN "+String.valueOf(i)+"\n"+pokemon1.name+"/"+pokemon1.type+" VS "+pokemon2.name+"/"+pokemon2.type +
                         " -> DRAW";
-            }
-
-            if((team1.tamaño == team2.tamaño)){
-                if(!(iguales(team1,team2))){
-                    team1.add(pokemon1);
-                    team2.add(pokemon2);
-                    break;
-                }
             }
             i++;
         }
@@ -262,8 +262,9 @@ public class main {
     public static boolean iguales(StackTeam team1, QueueTeam team2){
         PocketMonster aux1 = team1.fin;
         PocketMonster aux2 = team2.inicio;
-        while (aux1 != null && aux2 != null){
-            if(!(aux1.type.equalsIgnoreCase(aux2.type))) return false;
+        while (aux1 != null){
+            if(!(aux1.type.equalsIgnoreCase(aux2.type)))
+                return false;
             aux1 = aux1.siguiente;
             aux2 = aux2.siguiente;
         }

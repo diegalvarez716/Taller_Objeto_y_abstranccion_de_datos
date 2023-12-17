@@ -131,11 +131,11 @@ public class main {
                             }
                         }
                     }else if (buffer.equalsIgnoreCase("SHOW STACK TEAM")) {
-                        System.out.println(stackteam);
+                        stackteam = stackTeam.show();
                     }else if (buffer.equalsIgnoreCase("SHOW QUEUE TEAM")){
-                        System.out.println(queueteam);
+                        queueteam = queueTeam.show();
                     } else if (buffer.equalsIgnoreCase("ENCOUNTER")) {
-                        System.out.println(encuentro);
+                        encuentro = Encuentro(stackTeam,queueTeam);
                     }
                 }
 
@@ -160,10 +160,10 @@ public class main {
             }catch (IOException e){
                 JOptionPane.showMessageDialog(null, "Error al escribir el archivo de salida");
             }finally {
-                JOptionPane.showMessageDialog(null, "Archivo de salida escrito satisfactoriamente");
+                JOptionPane.showMessageDialog(null, "Archivo de salida escrito satisfactoriamente en el escritorio");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Debe pasar un archivo como parametro");
+           JOptionPane.showMessageDialog(null, "Debe pasar un archivo como parametro");
         }
 
 
@@ -179,7 +179,6 @@ public class main {
             pokemon2 = team2.remove();
 
             if((team1.tamaño == team2.tamaño)){
-                System.out.println("verifica tamaño");
                 if(iguales(team1,team2)){
                     team1.add(pokemon1);
                     team2.add(pokemon2);

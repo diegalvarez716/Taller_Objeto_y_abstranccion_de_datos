@@ -9,7 +9,7 @@ public class main {
         String encuentro="", stackteam="", queueteam="", stackpokedex="",queuepokedex="";
 
         String ruta = System.getProperty("user.home") + "/Desktop";
-        String rutaArchivo = ruta.replace("\\", "/")+"\\ArchivoSalida.mpdm";
+        String rutaArchivo = ruta.replace("\\", "/")+"\\ArchivoSalida"+args[0].trim()+".mpdm";
 
 
         if(args[0].length() > 0){

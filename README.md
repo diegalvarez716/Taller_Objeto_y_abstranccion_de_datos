@@ -29,7 +29,7 @@ Los comandos aceptados son:
 
 #Como Ejecutar el Codigo
 
-Para ejecutar el proyecto primero se debe de entrar a la carpeta "proyecto", una vez ahi se descarga el archivo llamado "proyecto1.exe", una vez descargado se debe de abrir la consola de comando en la misma direccion que este el ejecutable, para luego usar el comando "./proyecto1 nombre-del-test.md". El archivo de se creara en la direccion de la carpeta
+Para ejecutar el proyecto primero debe descargarse el proyecto usando "git clone https://github.com/diegalvarez716/Objeto_y_abstranccion_de_datos.git" despues se debe de acceder a la carpeta "proyecto", una vez en la carpete se debe de abrir la consola de comando en la misma direccion que este el ejecutable de "proyecto1.exe", para luego usar el comando "./proyecto1 nombre-del-test.md". El archivo de se creara en el escritorio
 
 
 #Ejemplos de entrada y salida

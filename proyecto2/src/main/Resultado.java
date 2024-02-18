@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.List;
 
 public class Resultado {
-    static List<Arbol> lista = new ArrayList<>();
+    public static List<Arbol> lista = new ArrayList<>();
     public static int resolucion(String expresion) {
         Stack<Integer> stack = new Stack<>();
         StringBuilder numBuilder = new StringBuilder();

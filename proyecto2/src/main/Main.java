@@ -1,16 +1,14 @@
 package main;
+import javax.swing.*;
 import java.io.*;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        Arbol et = new Arbol();
-
         //Creando los archivos
-        File input = new File("proyecto2\\entrada_y_salida\\test1.input");
-        File output = new File("proyecto2\\entrada_y_salida\\test1.output");
-        File tree = new File("proyecto2\\entrada_y_salida\\test1.tree");
+        File input = new File("proyecto2\\entrada_y_salida\\test1.input.mpdm");
+        File output = new File("proyecto2\\entrada_y_salida\\test1.output.mpdm");
+        File tree = new File("proyecto2\\entrada_y_salida\\test1.tree.mpdm");
 
         try {
             FileWriter fw = new FileWriter(input, true);
@@ -31,30 +29,38 @@ public class Main {
             e.printStackTrace(System.out);
         }
 
-        try{
-            PrintWriter salida = new PrintWriter(new FileWriter(output, true));
-            BufferedReader entrada = new BufferedReader(new FileReader("proyecto2\\entrada_y_salida\\test1.input"));
-            String lectura=entrada.readLine();
+       if(!args[0].isEmpty()){
+           try{
+               PrintWriter salida = new PrintWriter(new FileWriter(output, true));
+               PrintWriter salida2 = new PrintWriter(new FileWriter(tree, true));
+               BufferedReader entrada = new BufferedReader(new FileReader(args[0]));
+               String lectura=entrada.readLine();
+               int index =0;
+               while (lectura!=null){
+                   if("CORRECTO".equals(comprobar(lectura))){
+                       String expresion=Notacion.conversionPostfijo(lectura);
+                       int resultado=Resultado.resolucion(expresion);
+                       salida.println(resultado);
+                       try {
+                           salida2.println(Resultado.lista.get(index).graficar());
+                           index+=1;
+                       }catch (Exception e){}
+                   }else{
+                       salida.println(comprobar(lectura));
+                   }
+                   lectura=entrada.readLine();
+               }
+               salida.close();
+               salida2.close();
 
-            while (lectura!=null){
-                if("CORRECTO".equals(comprobar(lectura))){
-                    String expresion=Notacion.conversionPostfijo(lectura);
-                    int resultado=Resultado.resolucion(expresion);
-
-                    salida.println(resultado);
-
-                }else{
-                    salida.println(comprobar(lectura));
-                }
-                lectura=entrada.readLine();
-            }
-            salida.close();
-
-        }catch (FileNotFoundException e) {
-            e.printStackTrace(System.out);
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
-        }
+           }catch (FileNotFoundException e) {
+               e.printStackTrace(System.out);
+           } catch (IOException e) {
+               e.printStackTrace(System.out);
+           }
+       }else {
+           JOptionPane.showMessageDialog(null, "Debe pasar un archivo como parametro");
+       }
 
     }
 

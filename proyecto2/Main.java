@@ -1,17 +1,24 @@
+import java.io.*;
+import java.util.List;
+import static main.Resultado.*;
+import static main.Notacion.*;
+import main.Arbol;
+import main.Arbol.*;
+import main.Nodo;
 import main.Notacion;
 import main.Resultado;
 
-import javax.swing.*;
-import java.io.*;
-
 public class Main {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
+
+        Arbol arbol = new Arbol();
 
         //Creando los archivos
         File output = new File("entrada_y_salida\\test.output");
         File tree = new File("entrada_y_salida\\test.tree");
 
         try {
+
             FileWriter fw2 = new FileWriter(output, true);
             BufferedWriter bw2 = new BufferedWriter(fw2);
             PrintWriter salida2 = new PrintWriter(bw2);
@@ -25,41 +32,43 @@ public class Main {
             e.printStackTrace(System.out);
         }
 
-           try{
-               PrintWriter salida = new PrintWriter(new FileWriter(output, true));
-               PrintWriter salida2 = new PrintWriter(new FileWriter(tree, true));
-               BufferedReader entrada = new BufferedReader(new FileReader("entrada_y_salida\\test.input"));
-               String lectura=entrada.readLine();
-               int index =0;
-               while (lectura!=null){
-                   if("CORRECTO".equals(comprobar(lectura))){
-                       String expresion= Notacion.conversionPostfijo(lectura);
-                       int resultado= Resultado.resolucion(expresion);
-                       salida.println(resultado);
-                       salida.println("----------");
-                       try {
-                           salida2.println(Resultado.lista.get(index).graficar());
-                           index+=1;
-                           salida2.println("------------------------------------");
-                       }catch (Exception e){}
-                   }else{
-                       salida.println(comprobar(lectura));
-                       salida.println("----------");
-                       salida2.println(comprobar(lectura));
-                       salida2.println("------------------------------------");
-                   }
-                   lectura=entrada.readLine();
-               }
-               salida.close();
-               salida2.close();
+        try{
+            PrintWriter salida = new PrintWriter(new FileWriter(output, true));
+            PrintWriter salida2 = new PrintWriter(new FileWriter(tree, true));
+            BufferedReader entrada = new BufferedReader(new FileReader("entrada_y_salida\\test.input"));
+            String lectura=entrada.readLine();
 
-           }catch (FileNotFoundException e) {
-               e.printStackTrace(System.out);
-           } catch (IOException e) {
-               e.printStackTrace(System.out);
-           }
-           System.out.println("El programa corrio");
+            while (lectura!=null){
+                if("CORRECTO".equals(comprobar(lectura))){
+                    String expresion= Notacion.conversionPostfijo(lectura);
+                    int resultado= Resultado.resolucion(expresion);
 
+                    String[] postfix = expresion.split(" ");
+                    Nodo raiz = arbol.construirArbol(postfix);
+                    arbol.imprimirArbolVertical(raiz, salida2);
+
+                    salida2.println("------------------------------------");
+                    salida.println(resultado);
+                    salida.println("-----------");
+
+                }else{
+                    salida.println(comprobar(lectura));
+                    salida.println("-----------");
+                    salida2.println(comprobar(lectura));
+                    salida2.println("------------------------------------");
+                }
+
+                lectura=entrada.readLine();
+            }
+            salida.close();
+            salida2.close();
+
+        }catch (FileNotFoundException e) {
+            e.printStackTrace(System.out);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+        System.out.println("Corrida Exitosa");
 
     }
 

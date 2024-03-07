@@ -27,8 +27,17 @@ String[] array2 = parts[1].substring(0, parts[1].length()-1).split(", ");
 
 En este fragmento de código, la línea de entrada se divide en dos partes en el primer paso. Cada parte representa un conjunto. Luego, cada conjunto se divide en sus elementos individuales. Estos elementos se utilizan para generar el producto cartesiano.
 
-## Cómo ejecutar
-Para ejecutar este programa, necesitarás tener instalado Java en tu sistema. Puedes ejecutar el programa utilizando el comando `java Cartesiano` desde la línea de comandos.
+## Como Ejecturalo: 
+    -En una terminal ejecutar el siguiente comando "git clone https://github.com/diegalvarez716/Taller_Objeto_y_abstranccion_de_datos.git"
+
+    -Una vez descargar da carpeta del proyecto llamada "proyecto3", debe entrar a dicha carpeta e ingresar a la sub-carpeta llmada "entrada_y_salida"
+    
+    -Modificar el acrhivo llamado "test.input", ahi se deben agregar todas las lineas de texto que se desean evaluar
+
+    -Luego desde la consolas de comando debe ingresar al directorio "proyecto3/Producto Cartesiano" y ejecutar el comando "javac Carteriano.java"
+
+    -Se creara un archivo .class, debe ejecutar el comando "java Cartesiano" para la ejecucion del programa, una vez ejecutado se crearan las respuestas en los archivos de salidad correspondientes en la sub-carpeta "entrada_y_salida"
 
 ## Notas
 Este programa asume que los archivos de entrada y salida están en el directorio `entrada_y_salida`. Asegúrate de que este directorio exista y contenga el archivo de entrada antes de ejecutar el programa.
+

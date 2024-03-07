@@ -1,0 +1,8 @@
+Considere una clase B hereda de otra clase A (esto es, B subclase de A). 
+Considere una clase Lista, parametrizable en el tipo de sus elementos, 
+¿Qué relación de herencia, de haberla, tienen Lista<A> y Lista<B>? 
+¿Qué decisión toma el lenguaje Java? Explique dicha decisión
+
+La relación de herencia entre Lista<A> y Lista<B> es que ambas son instancias de la misma clase genérica Lista,
+pero con diferentes tipos de elementos. Java permite que Lista<B> sea un subtipo de Lista<A> debido a la relación 
+de herencia entre B y A
